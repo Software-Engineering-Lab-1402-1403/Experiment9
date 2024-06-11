@@ -1,5 +1,19 @@
 # Experiment 9
 
+## Repo URL:
+
+https://github.com/Software-Engineering-Lab-1402-1403/Experiment9.git
+
+### PO:
+
+Ramtin Khoshnevis -> 99105764
+
+### Colaborators:
+
+Sarina Zahedi -> 98170838
+
+Arshia Dadras -> 99109109
+
 ## Get Code Coverage Status
 
 ### Json-Sample
@@ -221,4 +235,8 @@ After running all tests coverage percentages of these two classes became 100% an
 
 We improved models dir coverage from 83% on classes and 62% on lines to 100% on classes and 85% on lines.
 
+## Results
 
+The new version of code coverage has been exported in directory htmlNewReport. You can see the improvements in the picture below.
+
+![img.png](screenshots/newReport.png)
