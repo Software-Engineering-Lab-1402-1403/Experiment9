@@ -1,6 +1,8 @@
 package com.unittest.codecoverage.service;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -46,7 +48,7 @@ public class PersonServiceTest {
 		List<String> expectedErrors = Lists.newArrayList("Name is required", "Gender is required");
 		String expectedMessage = String.join(";", expectedErrors);
 		Person person = null;
-		
+
 		assertThatThrownBy(() -> service.insert(person))
 			.isInstanceOf(PersonException.class)
 			.hasFieldOrPropertyWithValue("errors", expectedErrors)
@@ -81,20 +83,34 @@ public class PersonServiceTest {
 			.hasFieldOrPropertyWithValue("errors", expectedErrors)
 			.hasMessage(expectedMessage);
 	}
-	
+
 	@Test
 	public void testInsert_shouldThrowPersonExceptionWhenPersonGenderIsNull() {
-		
+
 		List<String> expectedErrors = Lists.newArrayList("Gender is required");
 		String expectedMessage = String.join(";", expectedErrors);
 		Person person = new Person();
 		person.setName("Name");
 		person.setGender(null);
-		
+
 		assertThatThrownBy(() -> service.insert(person))
-			.isInstanceOf(PersonException.class)
-			.hasFieldOrPropertyWithValue("errors", expectedErrors)
-			.hasMessage(expectedMessage);
+				.isInstanceOf(PersonException.class)
+				.hasFieldOrPropertyWithValue("errors", expectedErrors)
+				.hasMessage(expectedMessage);
+	}
+
+	@Test
+	public void testGet() {
+		List<String> expectedErrors = Lists.newArrayList("Name is required");
+		String expectedMessage = String.join(";", expectedErrors);
+
+		assertThatThrownBy(() -> service.get(null))
+				.isInstanceOf(PersonException.class)
+				.hasFieldOrPropertyWithValue("errors", expectedErrors)
+				.hasMessage(expectedMessage);
+
+
+		assertNull(service.get("salam"));
 	}
 
 }

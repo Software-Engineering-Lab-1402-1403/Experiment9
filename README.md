@@ -25,7 +25,7 @@ Using the details here, we can improve test  coverage easily:
 
 ### PersonRepository Class
 
-As we can see in the previous pictures, PersonRepository class test coverage percent is 0%.
+As we can see in the previous pictures, PersonRepository class test coverage percentage is 0%.
 
 We add 4 methods to test all of this class methods.
 
@@ -108,3 +108,34 @@ Using these tests we improved this directory test coverage from 0% to 100%.
 
 ![img.png](screenshots/repo_improve.png)
 
+### PersonService Class
+
+As we can see in the previous pictures, PersonRepository class test coverage percentage is 40% of Methods and 33% of Lines.
+
+![img.png](screenshots/personBefore.png)
+
+We add 1 methods to test get method of this class.
+
+#### 1- Get
+
+```java
+@Test
+    public void testGet() {
+        List<String> expectedErrors = Lists.newArrayList("Name is required");
+        String expectedMessage = String.join(";", expectedErrors);
+
+        assertThatThrownBy(() -> service.get(null))
+                .isInstanceOf(PersonException.class)
+                .hasFieldOrPropertyWithValue("errors", expectedErrors)
+                .hasMessage(expectedMessage);
+
+
+        assertNull(service.get("salam"));
+    }
+```
+
+#### Improvement
+
+After running this test the percentage of this is 60% on Methods and 50% on lines.
+
+![img.png](screenshots/personNew.png)
