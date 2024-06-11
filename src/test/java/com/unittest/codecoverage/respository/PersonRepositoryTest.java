@@ -1,40 +1,20 @@
-# Experiment 9
+package com.unittest.codecoverage.respository;
 
-## Get Code Coverage Status
+import com.unittest.codecoverage.models.Gender;
+import com.unittest.codecoverage.models.Person;
+import com.unittest.codecoverage.repositories.PersonRepository;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-### Json-Sample
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-Here is json-sample project code coverage result:
+@ExtendWith(MockitoExtension.class)
+public class PersonRepositoryTest {
+    PersonRepository repository = new PersonRepository();
 
-![img.png](screenshots/json1.png)
-![img.png](screenshots/json2.png)
-![img.png](screenshots/json3.png)
-
-### CodeCoverageProject
-
-In the pictures below we do the same thing for the second project.
-
-![img.png](screenshots/code1.png)
-![img.png](screenshots/code2.png)
-
-Using the details here, we can improve test  coverage easily:
-
-![img.png](screenshots/code3.png)
-
-## Improve Test Coverage
-
-### PersonRepository Class
-
-As we can see in the previous pictures, PersonRepository class test coverage percent is 0%.
-
-We add 4 methods to test all of this class methods.
-
-#### 1- Insert
-
-Using this code block we test all functionalities of repository.insert() method. If the input person is null, it should throw a NullPointerException. If not, it will return the person.
-
-```java
-@Test
+    @Test
     public void testInsert_shouldThrowNullPointerExceptionWhenPersonIsNull() {
         assertThatThrownBy(() -> repository.insert(null))
                 .isInstanceOf(NullPointerException.class)
@@ -49,14 +29,8 @@ Using this code block we test all functionalities of repository.insert() method.
 
         assertEquals(person, p);
     }
-```
 
-#### 2- Delete
-
-Using this code block we test all functionalities of repository.delete().
-
-```java
-@Test
+    @Test
     public void testDelete_shouldThrowNullPointerExceptionWhenStringIsNull() {
         assertThatThrownBy(() -> repository.delete(null))
                 .isInstanceOf(NullPointerException.class)
@@ -64,14 +38,8 @@ Using this code block we test all functionalities of repository.delete().
 
         repository.delete("salam");
     }
-```
 
-#### 3- Update
-
-Using this code block we test all functionalities of repository.update().
-
-```java
-@Test
+    @Test
     public void testUpdate_shouldThrowNullPointerExceptionWhenPersonIsNull() {
         assertThatThrownBy(() -> repository.update(null))
                 .isInstanceOf(NullPointerException.class)
@@ -84,14 +52,8 @@ Using this code block we test all functionalities of repository.update().
 
         repository.update(person);
     }
-```
 
-#### 4- Get
-
-Using this code block we test all functionalities of repository.get().
-
-```java
-@Test
+    @Test
     public void testGet_shouldThrowNullPointerExceptionWhenPersonIsNull() {
         assertThatThrownBy(() -> repository.get(null))
                 .isInstanceOf(NullPointerException.class)
@@ -100,11 +62,4 @@ Using this code block we test all functionalities of repository.get().
 
         repository.get("person");
     }
-```
-
-#### Improvement
-
-Using these tests we improved this directory test coverage from 0% to 100%.
-
-![img.png](screenshots/repo_improve.png)
-
+}
