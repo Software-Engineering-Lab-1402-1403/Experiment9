@@ -21,7 +21,9 @@ Using the details here, we can improve test  coverage easily:
 
 ![img.png](screenshots/code3.png)
 
-## Improve Test Coverage
+# Improve Test Coverage
+
+## Repositories Directory
 
 ### PersonRepository Class
 
@@ -108,6 +110,8 @@ Using these tests we improved this directory test coverage from 0% to 100%.
 
 ![img.png](screenshots/repo_improve.png)
 
+## Services Directory
+
 ### PersonService Class
 
 As we can see in the previous pictures, PersonRepository class test coverage percentage is 40% of Methods and 33% of Lines.
@@ -139,3 +143,82 @@ We add 1 methods to test get method of this class.
 After running this test the percentage of this is 60% on Methods and 50% on lines.
 
 ![img.png](screenshots/personNew.png)
+
+## Models Directory
+
+As we can see in the picture below, the previous percentages of classes in this directory is mentioned.
+
+![img.png](screenshots/modelsBefore.png)
+
+### FootPassenger Class
+
+The previous percentage of this class was 81% on Methods and 81% on Lines.
+
+```java
+@Test
+    public void testFootpassengerCrossTheStreet() {
+        Footpassenger currentFootpassengerBehavior = new Footpassenger();
+
+        currentFootpassengerBehavior.setCrossedTheCrosswalk(true);
+        assertTrue(currentFootpassengerBehavior.crossedTheCrosswalk());
+
+        currentFootpassengerBehavior.setCrossedTheCrosswalk(false);
+        assertFalse(currentFootpassengerBehavior.crossedTheCrosswalk());
+    }
+```
+
+After running this test both of the percentages are 100% for this class.
+
+![img.png](screenshots/footNew.png)
+
+### Person Class
+
+By adding the assertEquals for person.getAge() method we increase percentage of this class.
+
+```java
+@Test
+    public void testInsert_shouldThrowNullPointerExceptionWhenPersonIsNull() {
+        assertThatThrownBy(() -> repository.insert(null))
+                .isInstanceOf(NullPointerException.class)
+                .hasMessage("person can't be null");
+
+        Person person = new Person();
+        person.setName("Name");
+        person.setAge(21);
+        person.setGender(Gender.M);
+        
+        assertEquals(21, person.getAge());
+
+        Person p = repository.insert(person);
+
+        assertEquals(person, p);
+    }
+```
+
+The percentage increased form 85% to 100%.
+
+![img.png](screenshots/personClassNew.png)
+
+### StreetDirectionFlow and Traffic Class
+
+From the previous picture we know coverage percentages of these two classes were 0% and 27% respectively. Using the code block below we improve test coverage for both of them.
+
+```java
+@Test
+    public void testStreetDirectionFlow() {
+        Traffic currentTrafic = new Traffic();
+        currentTrafic.setStreetDirectionFlow(StreetDirectionFlow.TWO_WAY);
+
+        assertEquals(currentTrafic.getStreetDirectionFlow(), StreetDirectionFlow.TWO_WAY);
+    }
+```
+
+After running all tests coverage percentages of these two classes became 100% and 40% respectively. So we improve both of them. It is obvious in the picture below.
+
+![img.png](screenshots/trafficNew.png)
+
+### Improvement
+
+We improved models dir coverage from 83% on classes and 62% on lines to 100% on classes and 85% on lines.
+
+

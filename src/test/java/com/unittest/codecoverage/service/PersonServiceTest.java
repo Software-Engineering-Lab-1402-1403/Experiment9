@@ -27,8 +27,7 @@ public class PersonServiceTest {
 	
 	@InjectMocks
 	PersonService service = new PersonServiceImpl();
-	@Mock
-	PersonRepository repository;
+	PersonRepository repository = new PersonRepository();
 	
 	@Test
 	public void testInsert_shouldInsertPersonWithSuccessWhenAllPersonsInfoIsFilled() {
@@ -37,7 +36,7 @@ public class PersonServiceTest {
 		person.setAge(21);
 		person.setGender(Gender.M);
 		
-		when(repository.insert(any(Person.class))).thenReturn(person);
+		assertEquals(repository.insert(person), person);
 		
 		service.insert(person);
 	}
@@ -101,16 +100,19 @@ public class PersonServiceTest {
 
 	@Test
 	public void testGet() {
-		List<String> expectedErrors = Lists.newArrayList("Name is required");
+		List<String> expectedErrors = Lists.newArrayList("name can't be null");
 		String expectedMessage = String.join(";", expectedErrors);
 
 		assertThatThrownBy(() -> service.get(null))
-				.isInstanceOf(PersonException.class)
-				.hasFieldOrPropertyWithValue("errors", expectedErrors)
+				.isInstanceOf(NullPointerException.class)
 				.hasMessage(expectedMessage);
 
+		expectedErrors = Lists.newArrayList("Name is required");
+		expectedMessage = String.join(";", expectedErrors);
 
-		assertNull(service.get("salam"));
+		assertThatThrownBy(() -> service.get("salam"))
+				.isInstanceOf(PersonException.class)
+				.hasMessage(expectedMessage);
 	}
 
 }

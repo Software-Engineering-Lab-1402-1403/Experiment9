@@ -25,6 +25,8 @@ public class PersonRepositoryTest {
         person.setAge(21);
         person.setGender(Gender.M);
 
+        assertEquals(21, person.getAge());
+
         Person p = repository.insert(person);
 
         assertEquals(person, p);

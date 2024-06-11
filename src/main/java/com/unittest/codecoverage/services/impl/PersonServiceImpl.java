@@ -14,7 +14,7 @@ public class PersonServiceImpl implements PersonService {
 	
 	private PersonValidator validator;
 	@Autowired
-	private PersonRepository repository;
+	private PersonRepository repository = new PersonRepository();
 	
 	@Autowired
 	public PersonServiceImpl() {
